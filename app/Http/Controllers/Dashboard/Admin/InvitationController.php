@@ -14,7 +14,7 @@ class InvitationController extends Controller
     use Barcode;
 
     public function index()
-    {   
+    {
         $data = TicketHD::whereNotIn('category', [3])->orderByDesc('created_at')->get();
 
         $ctgs = Type::where('type', 1)->get();
@@ -37,6 +37,8 @@ class InvitationController extends Controller
         $hd->status = 2;
         $hd->qty = $request->qty;
         $hd->save();
+
+        
 
         $hd_id = $hd->id;
         $ticket_code = Type::where('id', $request->ctg)->first();
